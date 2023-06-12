@@ -1,7 +1,7 @@
 import argparse
 
 from magpie.core import check_threshold, load_rules
-from magpie.message import set_bark_token
+from magpie.message import bark_send_message, set_bark_token
 from magpie.server import add_server_arguments, run_server
 
 
@@ -37,7 +37,7 @@ def main():
     if args.action == "server":
         run_server(rules)
     else:
-        check_threshold(rules, send_msg_func=print)
+        check_threshold(rules, send_msg_func=bark_send_message)
 
 
 main()
