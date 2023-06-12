@@ -1,0 +1,9 @@
+[
+  {
+    "stock_code": "sh000001",
+    "stock_name": "上证指数",
+    "base_price": 3200,
+    "alarm_price_min": 3000,
+    "alarm_price_max": 3400
+  }
+]

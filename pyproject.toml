@@ -1,0 +1,93 @@
+[tool.poetry]
+name = "magpie"
+version = "0.1.0"
+description = ""
+authors = ["vicalloy <zbirder@gmail.com>"]
+readme = "README.md"
+
+[[tool.poetry.source]]
+name = "bfsu"
+url = "https://mirrors.bfsu.edu.cn/pypi/web/simple/"
+default = true
+secondary = true
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31.0"
+easyquotation = "^0.7.5"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.2"
+pytest-cov = "^3.0.0"
+pre-commit = "^2.17.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+target-version = ['py310']
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+files = ["castle", ]
+ignore_missing_imports = true
+python_version = '3.10'
+
+[tool.ruff]
+fix = true
+select = [
+    #    "A",  # flake8-builtins
+    #    "ANN",  # flake8-annotations
+    #    "ARG",  # flake8-unused-arguments
+    "B",  # flake8-bugbear
+    #    "BLE",  # flake8-blind-except
+    "C",  # flake8-comprehensions
+    #    "D",  # pydocstyle
+    "E",  # pycodestyle errors
+    #    "ERA",  # eradicate
+    "F",  # pyflakes
+    #    "FBT",  # flake8-boolean-trap
+    "I",  # isort
+    "ICN",  # flake8-import-conventions
+    "N",  # pep8-naming
+    #    "PGH",  # pygrep-hooks
+    "PLC", "PLE", "PLR", "PLW",  # Pylint
+    "Q",  # flake8-quotes
+    "RET",  # flake8-return
+    #    "RUF",  # Ruff-specific rules
+    "S",  # flake8-bandit
+    #    "T",  # flake8-debugger
+    #    "TID",  # flake8-tidy-imports
+    "UP", # pyupgrade
+    "W",  # pycodestyle warnings
+]
+ignore = [
+    "C901",  # too complex
+    "B905",  # `zip()` without an explicit `strict=` parameter
+    "S101",  # Use of `assert` detected
+    "S104",  # Possible binding to all interfaces
+    "S108",  # Probable insecure usage of temporary file or directory: "/tmp"
+    "RET504",  # Unnecessary variable assignment before `return` statement
+    "PLW0603",
+    "PLR2004",
+]
+
+[tool.ruff.isort]
+known-first-party = ["magpie"]

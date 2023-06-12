@@ -1,0 +1,5 @@
+[run]
+omit = tests/*,vendor/*
+
+[html]
+directory = coverage_html_report
