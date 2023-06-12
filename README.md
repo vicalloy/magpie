@@ -1,0 +1,3 @@
+# Magpie
+
+A stock tool.
