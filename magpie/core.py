@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import easyquotation
 
-quotation = easyquotation.use("sina")
+quotation = easyquotation.use("qq")
 
 
 @dataclass
