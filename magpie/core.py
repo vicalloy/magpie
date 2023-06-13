@@ -4,7 +4,12 @@ from dataclasses import dataclass
 
 import easyquotation
 
-quotation = easyquotation.use("qq")
+_quotation = easyquotation.use("qq")
+
+
+def set_datasource(datasource: str):
+    global _quotation
+    _quotation = easyquotation.use(datasource)
 
 
 @dataclass
@@ -79,7 +84,7 @@ def load_rules(fn: str) -> dict[str, Rule]:
 
 
 def check_threshold(rules: dict[str, Rule], send_msg_func: Callable) -> str:
-    stock_info_dict = quotation.stocks(list(rules.keys()), prefix=True)
+    stock_info_dict = _quotation.stocks(list(rules.keys()), prefix=True)
     output = []
     for stock_code, rule in rules.items():
         price = stock_info_dict[stock_code]["now"]

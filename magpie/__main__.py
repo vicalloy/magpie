@@ -1,6 +1,6 @@
 import argparse
 
-from magpie.core import check_threshold, load_rules
+from magpie.core import check_threshold, load_rules, set_datasource
 from magpie.message import bark_send_message, set_bark_token
 from magpie.server import add_server_arguments, run_server
 
@@ -12,7 +12,7 @@ def get_args():
         default="check",
         choices=["check", "server"],
         nargs="?",
-        help="run http server or check threshold" "(default: %(default)s)",
+        help="run http server or check threshold(default: %(default)s)",
     )
     parser.add_argument(
         "-r",
@@ -22,7 +22,13 @@ def get_args():
     )
     parser.add_argument(
         "--bark-token",
-        help="bark token",
+    )
+    parser.add_argument(
+        "-d",
+        "--datasource",
+        default="qq",
+        choices=["qq", "tencent", "sina"],
+        help="datasource(default: %(default)s)",
     )
     add_server_arguments(parser)
     return parser.parse_args()
@@ -33,6 +39,7 @@ def main():
 
     rules = load_rules(args.rule)
     set_bark_token(args.bark_token)
+    set_datasource(args.datasource)
 
     if args.action == "server":
         run_server(rules)
