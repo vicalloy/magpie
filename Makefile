@@ -1,5 +1,16 @@
-token ?= bark_token
 datasource ?= qq
+
+ifdef bark-token
+bark-token-arg = --bark-token $(bark-token)
+endif
+
+ifdef tg-token
+tg-token-arg = --tg-token $(tg-token)
+endif
+
+ifdef tg-chat-id
+tg-chat-id-arg = --tg-chat-id $(tg-chat-id)
+endif
 
 init-pre-commit:
 	git config --global url."https://".insteadOf git://
@@ -17,7 +28,12 @@ server:
 	python -m magpie server -r ./rules.json
 
 check:
-	python -m magpie check -r ./rules.json -d $(datasource) --bark-token $(token)
+	python -m magpie check \
+		-r ./rules.json \
+		-d $(datasource) \
+		$(bark-token-arg) \
+		$(tg-token-arg) \
+		$(tg-chat-id-arg)
 
 build-docker-image:
 	docker build -f Dockerfile -t magpie:latest .
@@ -32,4 +48,9 @@ docker-check:
 	docker run --rm \
  		-v `pwd`/rules.json:/app/rules.json \
 		magpie:latest \
-		python -m magpie check -r ./rules.json -d $(datasource) --bark-token $(token)
+		python -m magpie check \
+		-r ./rules.json \
+		-d $(datasource) \
+		$(bark-token-arg) \
+		$(tg-token-arg) \
+		$(tg-chat-id-arg)

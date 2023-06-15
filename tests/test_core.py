@@ -29,4 +29,4 @@ def test_check_threshold():
         "sh000001": Rule("sh000001", "上证指数", 3200).update(3019, 3201),
     }
 
-    check_threshold(_rules, send_msg_func=print)
+    check_threshold(_rules, send_msg_funcs=[print])

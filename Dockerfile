@@ -8,4 +8,4 @@ WORKDIR /app
 COPY ./ ./
 
 RUN poetry config virtualenvs.create false
-RUN poetry install --only=main
+RUN poetry install --only=main,telegram

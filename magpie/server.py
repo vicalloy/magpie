@@ -22,7 +22,7 @@ def html(content: str):
 class MagpieHandler(BaseHTTPRequestHandler):
     def get_content(self) -> str:
         server = cast(MagpieServer, self.server)  # type: ignore
-        return check_threshold(server.rules, send_msg_func=lambda text: text)
+        return check_threshold(server.rules, send_msg_funcs=[])
 
     def do_GET(self):  # noqa: N802
         self.send_response(200)
@@ -30,7 +30,6 @@ class MagpieHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         self.wfile.write(html(self.get_content()))
-        # self.wfile.close()
 
 
 class MagpieServer(HTTPServer):

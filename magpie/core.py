@@ -1,5 +1,5 @@
 import json
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 
 import easyquotation
@@ -64,9 +64,10 @@ class Stock:
             or self.price < self.rule.alarm_price_min
         )
 
-    def check(self, send_msg_func: Callable):
+    def check(self, send_msg_funcs: Iterable[Callable]):
         if self.is_should_alarm():
-            send_msg_func(str(self))
+            for send_msg_func in send_msg_funcs:
+                send_msg_func(str(self))
 
     def __str__(self):
         percentage = f"{((self.price / self.rule.base_price) - 1) * 100:.1f}%"
@@ -83,12 +84,12 @@ def load_rules(fn: str) -> dict[str, Rule]:
         return {data["stock_code"]: Rule.from_dict(data) for data in json.load(f)}
 
 
-def check_threshold(rules: dict[str, Rule], send_msg_func: Callable) -> str:
+def check_threshold(rules: dict[str, Rule], send_msg_funcs: Iterable[Callable]) -> str:
     stock_info_dict = _quotation.stocks(list(rules.keys()), prefix=True)
     output = []
     for stock_code, rule in rules.items():
         price = stock_info_dict[stock_code]["now"]
         stock = Stock(rule, price)
-        stock.check(send_msg_func=send_msg_func)
+        stock.check(send_msg_funcs=send_msg_funcs)
         output.append(str(stock))
     return "\r\n".join(output)

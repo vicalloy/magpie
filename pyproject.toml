@@ -23,6 +23,10 @@ pytest-cov = "^3.0.0"
 pre-commit = "^2.17.0"
 
 
+
+[tool.poetry.group.telegram.dependencies]
+python-telegram-bot = "^20.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
