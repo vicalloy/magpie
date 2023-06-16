@@ -4,8 +4,7 @@
 
 注：
 
-- 目前只支持使用 [Bark](https://github.com/Finb/Bark/blob/master/README.en.md) 推送。
-- 请在 iPhone 上安装 `Bark` 客户端，并获取对应的 `Token` 。
+- 支持的推送平台有 [Telegram](https://telegram.org/) / [Bark](https://github.com/Finb/Bark/blob/master/README.en.md) 。
 
 ## 用法
 
@@ -49,10 +48,23 @@ docker run --rm \
     -v `pwd`/rules.json:/app/rules.json \
     magpie:latest \
     python -m magpie check -r ./rules.json \
-    --datasource qq --bark-token $(token)
+    --datasource qq \
+    --bark-token $(bark-token) \
+    --tg-token $(tg-token) \
+    --tg-chat-id $(tg-chat-id)
 ```
 
 可以通过设置 `crontab` 的方式定时执行股价的检查。
+
+
+**备注**
+
+- 使用 [Bark](https://github.com/Finb/Bark/blob/master/README.en.md)
+  - 请在 iPhone 上安装 `Bark` 客户端，并获取对应的 `Token` 。
+- Using [Telegram](https://telegram.org/)
+    - [创建一个 Bot 并获取对应的 Bot token](https://core.telegram.org/bots/tutorial#obtain-your-bot-token)
+    - 创建一个 `Group` 并获取对应的 `chat id`.
+        - 例如: https://web.telegram.org/a/#-1045009696  `-1045009696` is the `chat id`.
 
 ```
 10 9,10,11,12,13,14 * * * sudo docker run ....
