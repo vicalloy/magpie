@@ -63,8 +63,8 @@ docker run --rm \
   - 请在 iPhone 上安装 `Bark` 客户端，并获取对应的 `Token` 。
 - Using [Telegram](https://telegram.org/)
     - [创建一个 Bot 并获取对应的 Bot token](https://core.telegram.org/bots/tutorial#obtain-your-bot-token)
-    - 创建一个 `Group` 并获取对应的 `chat id`.
-        - 例如: https://web.telegram.org/a/#-1045009696  `-1045009696` is the `chat id`.
+    - 创建一个 `Group` ，并将刚创建的 Bot 添加到该Group，然后获取 Group 对应的 `chat id`.
+        - 例如: https://web.telegram.org/a/#-1045009696  `-1045009696` 就是 `chat id`.
 
 ```
 10 9,10,11,12,13,14 * * * sudo docker run ....

@@ -96,7 +96,7 @@ You can set up a `crontab` to perform stock price checks regularly.
   - Please install the `Bark` client on your iPhone and obtain the corresponding `Token`.
 - Using [Telegram](https://telegram.org/)
   - [Create a bot and obtain your bot token](https://core.telegram.org/bots/tutorial#obtain-your-bot-token)
-  - Create a group and obtain the `chat id`.
+  - Create a group, add the bot to the group, and then obtain the `chat id`.
     - ex: https://web.telegram.org/a/#-1045009696  `-1045009696` is the `chat id`.
 
 ```
